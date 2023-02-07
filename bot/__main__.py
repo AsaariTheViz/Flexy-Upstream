@@ -85,22 +85,18 @@ def stats(update, context):
 <b>├ Bot Uptime:</b> {get_readable_time(time() - botStartTime)}
 <b>└ OS Uptime:</b> {get_readable_time(time() - boot_time())}\n
 <b>SYSTEM STATS 🧮 </b>
-<b>┌ SWAP:</b> {get_readable_file_size(swap_memory().total)}
 <b>├ Total Cores:</b> {cpu_count(logical=True)}
-<b>├ Physical Cores:</b> {cpu_count(logical=False)}
+<b>├ Physical Cores:</b> {cpu_count(logical=False)}\n
 <b>├ Upload:</b> {get_readable_file_size(net_io_counters().bytes_sent)}
-<b>├ Download:</b> {get_readable_file_size(net_io_counters().bytes_recv)}
-<b>├ Disk Free:</b> {get_readable_file_size(disk_usage("/")[2])}
-<b>├ Disk Used:</b> {get_readable_file_size(disk_usage("/")[1])}
-<b>├ Disk Total:</b> {get_readable_file_size(disk_usage("/")[0])}
-<b>├ Memory Free:</b> {get_readable_file_size(virtual_memory().available)}
-<b>├ Memory Used:</b> {get_readable_file_size(virtual_memory().used)}
+<b>├ Download:</b> {get_readable_file_size(net_io_counters().bytes_recv)}\n
+<b> Disk Total:</b> {get_readable_file_size(disk_usage("/")[0])}
+<b>Disk Used:</b> {get_readable_file_size(disk_usage("/")[1])} | <b>Disk Free:</b> {get_readable_file_size(disk_usage("/")[2])}\n
 <b>├ Memory Total:</b> {get_readable_file_size(virtual_memory().total)}
+<b>Memory Used:</b> {get_readable_file_size(virtual_memory().used)} | <b>Memory Free:</b> {get_readable_file_size(virtual_memory().available)}\n
 <b>├ CPU:</b> {progress_bar(cpu_percent(interval=1))} {cpu_percent(interval=1)}%
 <b>├ RAM:</b> {progress_bar(virtual_memory().percent)} {virtual_memory().percent}%
-<b>├ DISK:</b> {progress_bar(disk_usage("/")[3])} {disk_usage("/")[3]}%
-<b>├ SWAP:</b> {progress_bar(swap_memory().percent)} {swap_memory().percent}%
-<b>└ OS:</b> {system()}, {architecture()[0]}, {release()}\n
+<b>├ DISK:</b> {progress_bar(disk_usage("/")[3])} {disk_usage("/")[3]}%\n
+<b> 🧩 OS:</b> {system()}, {architecture()[0]}, {release()}\n
 '''
 
     else:
@@ -109,23 +105,20 @@ def stats(update, context):
 <b>┌ Commit Date:</b> {last_commit}
 <b>├ Bot Uptime:</b> {get_readable_time(time() - botStartTime)}
 <b>└ OS Uptime:</b> {get_readable_time(time() - boot_time())}\n
-<b>SYSTEM STATS 🧮</b>
-<b>┌ SWAP:</b> {get_readable_file_size(swap_memory().total)}
-<b>├ Total Cores:</b> {cpu_count(logical=True)}
-<b>├ Physical Cores:</b> {cpu_count(logical=False)}
-<b>├ Upload:</b> {get_readable_file_size(net_io_counters().bytes_sent)}
-<b>├ Download:</b> {get_readable_file_size(net_io_counters().bytes_recv)}
-<b>├ Disk Free:</b> {get_readable_file_size(disk_usage("/")[2])}
-<b>├ Disk Used:</b> {get_readable_file_size(disk_usage("/")[1])}
-<b>├ Disk Total:</b> {get_readable_file_size(disk_usage("/")[0])}
-<b>├ Memory Free:</b> {get_readable_file_size(virtual_memory().available)}
-<b>├ Memory Used:</b> {get_readable_file_size(virtual_memory().used)}
-<b>├ Memory Total:</b> {get_readable_file_size(virtual_memory().total)}
-<b>├ CPU:</b> {progress_bar(cpu_percent(interval=1))} {cpu_percent(interval=1)}%
-<b>├ RAM:</b> {progress_bar(virtual_memory().percent)} {virtual_memory().percent}%
-<b>├ DISK:</b> {progress_bar(disk_usage("/")[3])} {disk_usage("/")[3]}%
-<b>├ SWAP:</b> {progress_bar(swap_memory().percent)} {swap_memory().percent}%
-<b>└ OS:</b> {system()}, {architecture()[0]}, {release()}\n
+<b>SYSTEM STATS 🧮 </b>
+<b> Total Cores:</b> {cpu_count(logical=True)}
+<b> Physical Cores:</b> {cpu_count(logical=False)}\n
+<b> Upload:</b> {get_readable_file_size(net_io_counters().bytes_sent)}
+<b> Download:</b> {get_readable_file_size(net_io_counters().bytes_recv)}\n
+<b> Total Disk Space:</b> {get_readable_file_size(disk_usage("/")[0])}
+<b>Used:</b> {get_readable_file_size(disk_usage("/")[1])} | <b>Free:</b> {get_readable_file_size(disk_usage("/")[2])}\n
+<b>SWAP:</b> {get_readable_file_size(swap_memory().total)} | <b>Used:</b> {get_readable_file_size(swap_memory().used)}
+<b> Memory Total:</b> {get_readable_file_size(virtual_memory().total)}
+<b>Used:</b> {get_readable_file_size(virtual_memory().used)} | <b>Free:</b> {get_readable_file_size(virtual_memory().available)}\n
+<b> CPU:</b> {progress_bar(cpu_percent(interval=1))} {cpu_percent(interval=1)}%
+<b> RAM:</b> {progress_bar(virtual_memory().percent)} {virtual_memory().percent}%
+<b> DISK:</b> {progress_bar(disk_usage("/")[3])} {disk_usage("/")[3]}%\n
+<b> 🧩 OS:</b> {system()}, {architecture()[0]}, {release()}\n
 '''
 
 
@@ -148,7 +141,7 @@ def stats(update, context):
         user_task = 'No Limit Set' if USER_TASKS_LIMIT == '' else f'{USER_TASKS_LIMIT} Tasks/user'
 
         if config_dict['EMOJI_THEME']:
-            stats += f'<b>╭─《 BOT LIMITS 🚧 》</b>\n'\
+            stats += f'<b>╭─《 ⚠️ BOT LIMITS ⚠️ 》</b>\n'\
                      f'<b>├ 🧲 Torrent/Direct: </b>{torrent_direct}\n'\
                      f'<b>├ 🔐 Zip/Unzip: </b>{zip_unzip}\n'\
                      f'<b>├ 🔷 Leech: </b>{leech_limit}\n'\
@@ -181,7 +174,7 @@ def start(update, context):
         buttons.buildbutton(f"{config_dict['START_BTN2_NAME']}", f"{config_dict['START_BTN2_URL']}")
     reply_markup = buttons.build_menu(2)
     if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
-        start_string = f'''This bot can leech all your links to Telegram!
+        start_string = f'''This bot can leech all your links to Telegram 📥
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
         if config_dict['PICS']:
@@ -197,7 +190,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
 
 
 def restart(update, context):
-    restart_message = sendMessage("Restarting...", context.bot, update.message)
+    restart_message = sendMessage("Restarting...♻️", context.bot, update.message)
     if Interval:
         Interval[0].cancel()
         Interval.clear()
@@ -221,9 +214,9 @@ def ping(update, context):
         editMessage(f'{end_time - start_time} ms 🔥', reply)
     else:
         start_time = int(round(time() * 1000))
-        reply = sendMessage("Starting_Ping ", context.bot, update.message)
+        reply = sendMessage("Starting Ping ⚡ ", context.bot, update.message)
         end_time = int(round(time() * 1000))
-        editMessage(f'{end_time - start_time} ms ', reply)
+        editMessage(f'<b>Ping: </b>{end_time - start_time}ms 💦\n<b>Bot Uptime:</b> {get_readable_time(time() - botStartTime)}', reply)
 
 def log(update, context):
     sendLogFile(context.bot, update.message)
@@ -449,13 +442,13 @@ def main():
                 if ospath.isfile(".restartmsg"):
                     with open(".restartmsg") as f:
                         chat_id, msg_id = map(int, f)
-                    msg = f"😎 Restarted Successfully❗\n"
+                    msg = f" Restarted Successfully ✅\n"
                 else:
-                    msg = f"😎 Bot Restarted!\n"
-                msg += f"📅 DATE: {date}\n"
-                msg += f"⌚ TIME: {time}\n"
-                msg += f"🌐 TIMEZONE: {timez}\n"
-                msg += f"🤖 VERSION: {version}"
+                    msg = f"Bot Restarted ✔️\n"
+                msg += f" DATE: {date}\n"
+                msg += f" TIME: {time}\n"
+                msg += f" TIMEZONE: {timez}\n"
+                msg += f" VERSION: {version}"
 
                 for tag, links in data.items():
                     msg += f"\n{tag}: "
@@ -490,11 +483,11 @@ def main():
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
         try:
-            msg = f"😎 Restarted Successfully❗\n"
-            msg += f"📅 DATE: {date}\n"
-            msg += f"⌚ TIME: {time}\n"
-            msg += f"🌐 TIMEZONE: {timez}\n"
-            msg += f"🤖 VERSION: {version}"
+            msg = f"<b>Restarted Successfully ✅</b>\n"
+            msg += f" DATE: {date}\n"
+            msg += f" TIME: {time}\n"
+            msg += f" TIMEZONE: {timez}\n"
+            msg += f" VERSION: {version}"
             bot.edit_message_text(msg, chat_id, msg_id)
         except Exception as e:
             LOGGER.info(e)
