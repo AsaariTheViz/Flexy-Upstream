@@ -80,10 +80,6 @@ def stats(update, context):
     mem_u = get_readable_file_size(memory.used)
     if config_dict['EMOJI_THEME']:
             stats = f'''
-<b>BOT STATISTICS 📊</b>
-<b>┌ Commit Date:</b> {last_commit}
-<b>├ Bot Uptime:</b> {get_readable_time(time() - botStartTime)}
-<b>└ OS Uptime:</b> {get_readable_time(time() - boot_time())}\n
 <b>SYSTEM STATS 🧮 </b>
 <b>├ Total Cores:</b> {cpu_count(logical=True)}
 <b>├ Physical Cores:</b> {cpu_count(logical=False)}\n
@@ -101,10 +97,6 @@ def stats(update, context):
 
     else:
             stats = f'''
-<b>BOT STATISTICS 📊</b>
-<b>┌ Commit Date:</b> {last_commit}
-<b>├ Bot Uptime:</b> {get_readable_time(time() - botStartTime)}
-<b>└ OS Uptime:</b> {get_readable_time(time() - boot_time())}\n
 <b>SYSTEM STATS 🧮 </b>
 <b> Total Cores:</b> {cpu_count(logical=True)}
 <b> Physical Cores:</b> {cpu_count(logical=False)}\n
@@ -216,7 +208,11 @@ def ping(update, context):
         start_time = int(round(time() * 1000))
         reply = sendMessage("Starting Ping ⚡ ", context.bot, update.message)
         end_time = int(round(time() * 1000))
-        editMessage(f'<b>Ping: </b>{end_time - start_time}ms 💦\n<b>Bot Uptime:</b> {get_readable_time(time() - botStartTime)}', reply)
+        editMessage(f'<b>Ping: </b>{end_time - start_time}ms 💦\n
+                      <b>BOT STATISTICS 📊</b>
+                      <b>┌ Commit Date:</b> {last_commit}
+                      <b>├ Bot Uptime:</b> {get_readable_time(time() - botStartTime)}
+                      <b>└ OS Uptime:</b> {get_readable_time(time() - boot_time())}\n, reply)
 
 def log(update, context):
     sendLogFile(context.bot, update.message)
